@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 // Function to connect to MongoDB
 const connectDB = async () => {
@@ -20,4 +20,5 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+// module.exports = connectDB;
+export default connectDB;
