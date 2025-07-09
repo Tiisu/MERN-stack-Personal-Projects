@@ -1,5 +1,7 @@
 
-app.get('/api/products', async (req, res) => {
+
+// getting all the products
+export const getAllProducts = async (req, res) => {
   // getting all products from the database
   const products = ProductModel.find({})
     .then((products) => {
@@ -10,9 +12,11 @@ app.get('/api/products', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }); 
     
-});
+};
 
-app.post('/api/products', async (req, res) =>  {
+
+// creating a new product
+export const createProduct = async (req, res) =>  {
   // This is a placeholder for user creation logic
   const newProduct = req.body;
   const { name, price, description, image, stock } = newProduct;
@@ -45,10 +49,10 @@ app.post('/api/products', async (req, res) =>  {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
-});
+};
 
 // getting a single product by id
-app.get('/api/products/:id', async (req, res) => {
+export const getProductById = async (req, res) => {
   const productId = req.params.id;
   try {
     const product = await ProductModel.findById(productId);
@@ -60,10 +64,10 @@ app.get('/api/products/:id', async (req, res) => {
     console.error('Error fetching product:', error);
     res.status(500).json({ message: 'Server error' });
   }
-});
+};
 
 // updating a product by id
-app.put('/api/products/:id', async (req, res) => {
+export const updateProductById = async (req, res) => {
   try {
     const productId = req.params.id;
     const updatedData = req.body;
@@ -84,10 +88,10 @@ app.put('/api/products/:id', async (req, res) => {
     console.error('Error updating product:', error);
     res.status(500).json({ message: 'Server error' });
   }
-});
+};
 
 // deleting a product by id
-app.delete('/api/products/:id', async (req, res) => {
+export const deleteProductById = async (req, res) => {
   const productId = req.params.id;
   try {
     const product = await ProductModel.findByIdAndDelete(productId);
@@ -99,4 +103,5 @@ app.delete('/api/products/:id', async (req, res) => {
     console.error('Error deleting product:', error);
         res.status(500).json({ message: 'Server error' });
       }
-    });
+    };
+
