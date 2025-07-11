@@ -1,13 +1,16 @@
 import {React, useEffect, useState } from 'react'
 import { Rocket } from 'lucide-react'
 import ProductsCard from '../components/ProductsCard'
+import ConfirmationModal from '../components/ConfirmationModal';
 // import { use, useEffect } from 'react'
 
 const HomePage = () => {
   
   // Fecthing data from the Backend
   const [products, setProducts] = useState([]);
-  console.log(products)
+  const [ showModel, setshowModel] = useState (false);
+  const [productId, setProductId] = useState(null);
+  // console.log(products)
   async function getAllProducts() {
     // use the fectch method to get the data
   const response = await fetch("http://localhost:3000/api/products", {
@@ -44,14 +47,21 @@ useEffect(()=> {
                 <ProductsCard
                 key={products._id}
                 products = {products}
+                setshowModel={setshowModel}
+                setProductId={setProductId}
                 />
 
             ))
           }
           
         </div>
+          {
 
+            showModel && (
+              <ConfirmationModal setshowModel={setshowModel} productId={productId} />
+            )
 
+          }
       </div>
     </>
   )

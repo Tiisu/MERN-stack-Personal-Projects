@@ -2,9 +2,12 @@ import { PenBox,Trash2Icon } from 'lucide-react'
 import React from 'react'
 
 
-const ProductsCard = ({key, products}) => {
+const ProductsCard = ({key, products, setshowModel, setProductId}) => {
 
     async function deleteProduct(id) {
+        setshowModel(true)
+        setProductId(id)
+
         try{
 
             const response = await fetch(`http://localhost:3000/api/products/${id}`, 
