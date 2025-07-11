@@ -92,8 +92,9 @@ export const updateProductById = async (req, res) => {
 
 // deleting a product by id
 export const deleteProductById = async (req, res) => {
-  const productId = req.params.id;
   try {
+    const productId = req.params.id;
+
     const product = await ProductModel.findByIdAndDelete(productId);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });

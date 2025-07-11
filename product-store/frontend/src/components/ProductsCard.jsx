@@ -1,20 +1,42 @@
 import { PenBox,Trash2Icon } from 'lucide-react'
 import React from 'react'
 
-const ProductsCard = () => {
+
+const ProductsCard = ({key, products}) => {
+
+    async function deleteProduct(id) {
+        try{
+
+            const response = await fetch(`http://localhost:3000/api/products/${id}`, 
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            )            
+             if (response.ok) {
+                console.log("Product deleted successfully")
+            }
+        } 
+        catch (error){
+            console.log(error)
+        }
+    }
+
   return (
-    <div className='bg-gray-900 rounded-4xl shadow-lg'>
+    <div key={key} className='bg-gray-900 rounded-4xl shadow-lg'>
         <div className='text-white'>
-            <img className='rounded-4xl'  src="https://images.unsplash.com/photo-1716882173326-04d822f142a8?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGlwaG9uZSUyMDE2fGVufDB8fDB8fHww" alt="" />
+            <img className='rounded-4xl'  src={products.image} alt="This is the alt" />
             <div className='p-5'>
-                <h3 className='text-2xl'>The title of the Product </h3>
+                <h3 className='text-2xl'>{products.name} </h3>
                 <div className='flex gap-1.5 mt-2 items-center justify-between'>
                     <div>
-                        <p className='text-xl'>Price: 50$</p>
+                        <p className='text-xl'>Price: {products.price}$</p>
                     </div>
                     <div className='flex gap-2 text-xl '>
                         <PenBox className='p-1 bg-blue-400 text-black rounded '/>
-                        <Trash2Icon className='p-1 bg-red-400 text-black rounded '/>
+                        <Trash2Icon className='p-1 bg-red-400 text-black rounded ' onClick={()=> deleteProduct (products._id)}/>
                     </div>
                 </div>
             </div>

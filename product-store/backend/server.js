@@ -5,10 +5,12 @@ import express from 'express';
 import connectDB from './config/db.js';
 import ProductModel from './models/productsModels.js';
 import producRouter from './routes/productsRoute.js';
+import cors from 'cors';
 
 // Creating an instance of express
 const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(cors("*"))
 app.use('/api/products', producRouter)
 
 
