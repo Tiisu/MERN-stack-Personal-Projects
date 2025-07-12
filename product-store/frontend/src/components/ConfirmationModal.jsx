@@ -1,5 +1,7 @@
 import { Button } from "@radix-ui/themes";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function ConfirmationModal({ setshowModel, productId }) {
   async function deleteProduct(id) {
@@ -14,6 +16,7 @@ function ConfirmationModal({ setshowModel, productId }) {
 
       if (response.ok) {
         console.log("Product Deleted Successfully!");
+        
       }
       return data.product;
     } catch (error) {
@@ -30,16 +33,15 @@ function ConfirmationModal({ setshowModel, productId }) {
           <Button onClick={() => setshowModel(false)} variant="outline">
             Cancel
           </Button>
-          <Button
-            onClick={() => {
-              deleteProduct(productId);
-              setShowModal(false);
-            }}
-            variant="solid"
-            color="red"
-          >
-            Delete
-          </Button>
+            <Button
+              onClick={() => {
+                deleteProduct(productId);
+                setshowModel(false);
+              }}
+              variant="solid"
+            >
+              Confirm
+            </Button>
         </div>
       </div>
     </div>

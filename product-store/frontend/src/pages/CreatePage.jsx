@@ -39,7 +39,7 @@ const CreatePage = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Product created:", data.product)
-        navigate("/")
+        // navigate("/")
       }
 
       
