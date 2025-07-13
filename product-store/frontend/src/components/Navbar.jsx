@@ -1,6 +1,7 @@
 import React from 'react'
 import { PlusIcon, SunIcon } from 'lucide-react'
 import { Link, Links } from 'react-router-dom'
+import ThemeSwitcher from './ThemeSwitcher'
 
 function Navbar() {
   return (
@@ -19,7 +20,8 @@ function Navbar() {
 
       </Link>
         <button className='bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded'>
-          <SunIcon className='inline-block mr-2' />
+          <ThemeSwitcher />
+
         </button>
       </div>
     </div>
