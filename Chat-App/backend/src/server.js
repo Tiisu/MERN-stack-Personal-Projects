@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 // Import routes
 app.use('/api/auth', authRouter); // Use authentication routes under /api/auth
 
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

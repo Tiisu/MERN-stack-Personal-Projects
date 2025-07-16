@@ -1,23 +1,13 @@
 // Import required packages
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-
+import jwt from 'jsonwebtoken';
+import User from '../models/user.models.js';
+import dotenv from 'dotenv';
+dotenv.config();
 // Authentication middleware function
 const auth = async (req, res, next) => {
   try {
-    // Get token from Authorization header
-    const authHeader = req.header('Authorization');
-    
-    // Check if Authorization header exists
-    if (!authHeader) {
-      return res.status(401).json({
-        success: false,
-        message: 'No authorization header, access denied'
-      });
-    }
-    
-    // Extract token (remove "Bearer " prefix)
-    const token = authHeader.replace('Bearer ', '');
+    // Get token from cookie or Authorization header
+    const token = req.cookies.jwt || req.header('Authorization')?.replace('Bearer ', '');
     
     // Check if token exists
     if (!token) {
@@ -58,4 +48,4 @@ const auth = async (req, res, next) => {
 };
 
 // Export the middleware
-module.exports = auth;
+export default auth;
