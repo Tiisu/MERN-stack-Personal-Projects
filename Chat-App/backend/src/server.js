@@ -8,7 +8,10 @@ import authRouter from '../routes/auth.routes.js'; // Import authentication rout
 dotenv.config();
 const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
-app.use(cors("*")); // Enable CORS for all origins ( what is cors?  Cross-Origin Resource Sharing)
+app.use(cors({
+  origin: '*', // Allow all origins for CORS
+  credentials: true // Allow credentials to be included in requests
+})); // Enable CORS for all origins ( what is cors?  Cross-Origin Resource Sharing)
 
 
 
