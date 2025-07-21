@@ -1,52 +1,72 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcryptjs";
+import userModel from "../models/user.model.js";
+import generateJWT from "../lib/generateJWT.js";
 
-import User from '../models/user.models.js';
 
-export const registerUser = async (req, res) => {
-    const { username, email, password, avatar } = req.body;
-
-    // Validate input
+export const signUp = async (req, res) => {
+  // const { username, email, password, avatar } = req.body;
+  const { data } = req.body;
+  console.log(data);
+  const username = data.username;
+  const email = data.email;
+  const password = data.password;
+  const avatar = data.avatarUrl || "https://example.com/default-avatar.png"; // Default
+  try {
+    // Validate data
     if (!username || !email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
+      return res.status(400).json({ message: "Please fill all fields" });
     }
 
-    try {
-
-        // validate password length
-        if (password.length < 6) {
-            return res.status(400).json({ message: 'Password must be at least 6 characters long' });
-        }
-
-        // encrpyt passowrd using bcrypt
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-            if (!hashedPassword) {
-                return res.status(500).json({ message: 'Error hashing password' });
-            }
-    
-            // Check if user already exists
-            const existingUser = await User.findOne({ email });
-            if (existingUser) {
-                return res.status(400).json({ message: 'User already exists' });
-            }
-    
-            // Create new user
-            const newUser = new User({
-                username,
-                email,
-                password: hashedPassword, // Password is hashed before saving
-                avatar,
-                isOnline: false // New users start offline
-            });
-    
-            await newUser.save();
-            res.status(201).json({ message: 'User registered successfully', user: newUser });
-        } catch (error) {
-            console.error('Registration error:', error);
-            res.status(500).json({ message: 'Server error' });
-        }
+    // Validate password length
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters" });
     }
+
+    // Encrypt the password using bycryptjs
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    if (!hashPassword) {
+        return res.status(404).json({
+            message: "Password hashing failed"
+        })
+    }
+
+    // Check if user already exists
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // Create new user
+    const newUser = new userModel({
+      username,
+      email,
+      password: hashPassword,
+      avatar
+    });
+
+    await newUser.save();
+
+    res.status(201).json({
+      message: "User created successfully",
+      user: {
+        id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+        avatar: newUser.avatar
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+       message: "Internal server error",
+        error: error.message
+    });
+  }
+};
+
 
 export const signIn = async (req, res) => {
   try {
@@ -82,7 +102,7 @@ export const signIn = async (req, res) => {
     await user.save();
 
     // 5️⃣ Generate token
-    const token = generateJWT(user._id);
+    const token = generateJWT(user._id, res);
 
     // 6️⃣ Send response
     res.status(200).json({
@@ -104,3 +124,56 @@ export const signIn = async (req, res) => {
     });
   }
 };
+
+
+export const SignOut = async (req, res) => {
+  try {
+    // Update user's online status to false
+    await userModel.findByIdAndUpdate(req.user._id, {
+      isOnline: false,
+    });
+
+    // Clear the JWT cookie
+    res.cookie('jwt', '', {
+      maxAge: 0, // Expire the cookie immediately
+      httpOnly: true, 
+      sameSite: 'strict', // Ensure the cookie is sent only in same-site requests
+      secure: process.env.NODE_ENV === 'production', 
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Logged out successfully',
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during logout',
+      error: error.message,
+    });
+  }
+};
+
+// Update user info controller
+
+export const checkAuth = async (req, res) => {
+  try {
+    if (!res.req.user) {
+      return res.status(401).json({
+        message: "Unauthorized access",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error during authentication check",
+      error: error.message,
+    });
+  }
+}
