@@ -48,9 +48,7 @@ function HomePage() {
             <Card  />
             <Card  />
             <Card  />
-            <Card  />
-            <Card  />
-            <Card  />
+           
         </div>
       </div>
 
