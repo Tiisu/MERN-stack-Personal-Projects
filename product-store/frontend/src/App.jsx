@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import CreatePage from './pages/CreatePage'
 import { Toaster } from 'sonner'
-
+import SignUpPage from './pages/SignUpPage'
 function App() {
 
   return (
@@ -17,6 +17,7 @@ function App() {
         {/* Define your routes here */}
         < Route path="/" element={<HomePage />} />
         < Route path="create-product" element={<CreatePage />} />
+        < Route path="signup" element={<SignUpPage />} />
         
       </Routes>
     </>
