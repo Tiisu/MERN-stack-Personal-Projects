@@ -21,6 +21,7 @@ const SignUpPage = () => {
                 </label>
                 <button type='submit' className='bg-blue-500 text-white p-2 rounded'>Sign Up</button>
             </form>
+            <p> Don't have an Account ? </p> <a> Sign In </a>
         </div>
     </div>
 
