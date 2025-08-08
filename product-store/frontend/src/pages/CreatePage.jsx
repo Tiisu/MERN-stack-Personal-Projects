@@ -49,25 +49,28 @@ const CreatePage = () => {
   }
   return (
     <>  
-      <div className='w-full border h-screen'>
-        <div className='p-5 mx-auto '>
-          <h1 className='text-2xl font-bold text-center'>Create New Product</h1>
-          <form onSubmit={submitProduct} action="POST" className='border p-5 rounded mt-5'>
+      <div className='w-full min-h-screen'>
+        <div className='px-4 sm:px-6 lg:px-8 mx-auto max-w-2xl'>
+          <h1 className='text-xl sm:text-2xl font-bold text-center pt-6'>Create New Product</h1>
+          <form onSubmit={submitProduct} action="POST" className='border p-4 sm:p-6 rounded mt-5 space-y-4 bg-white/5'>
             <div>
-              <input type="text" placeholder='Enter the product Name' id='name' className='border w-full mb-4 p-2 rounded' 
+              <label htmlFor='name' className='sr-only'>Product name</label>
+              <input type="text" placeholder='Enter the product name' id='name' className='border w-full p-2 rounded' 
               value={newProduct.name}
               onChange={(e) => setNewProduct ({...newProduct, name: e.target.value})}
               />
             </div>
             <div>
-              <input type="number" placeholder='Enter the product price' id='price' className='border w-full mb-4 p-2' min={0}
+              <label htmlFor='price' className='sr-only'>Product price</label>
+              <input type="number" placeholder='Enter the product price' id='price' className='border w-full p-2 rounded' min={0}
               value={newProduct.price}
               onChange={(e) => setNewProduct ({...newProduct, price: e.target.value})}
               
               />
             </div>
             <div>
-              <input type="url" placeholder='Enter the product image url' id='image' className='border w-full mb-4 p-2 rounded'
+              <label htmlFor='image' className='sr-only'>Image URL</label>
+              <input type="url" placeholder='Enter the product image url' id='image' className='border w-full p-2 rounded'
               value={newProduct.image}
               onChange={(e) => setNewProduct ({...newProduct, image: e.target.value})}
               
@@ -75,22 +78,26 @@ const CreatePage = () => {
             </div>
             
             <div>
-              <input type="number" placeholder='Enter the product Stock' id='stock' className='border w-full mb-4 p-2 rounded' min={0}
+              <label htmlFor='stock' className='sr-only'>Stock</label>
+              <input type="number" placeholder='Enter the product stock' id='stock' className='border w-full p-2 rounded' min={0}
               value={newProduct.stock}
               onChange={(e) => setNewProduct ({...newProduct, stock: e.target.value})}
               
               />
             </div>
-            <textarea name="description" className='w-full border  border-gray-300' placeholder='Enter the product description' rows="5" id='description' 
-            value={newProduct.description}
-            onChange={(e) => setNewProduct ({...newProduct, description: e.target.value})}
+            <div>
+              <label htmlFor='description' className='sr-only'>Description</label>
+              <textarea name="description" className='w-full border  border-gray-300 rounded p-2' placeholder='Enter the product description' rows="5" id='description' 
+              value={newProduct.description}
+              onChange={(e) => setNewProduct ({...newProduct, description: e.target.value})}
 
-            >
+              >
 
-            </textarea>
+              </textarea>
+            </div>
 
-            <div className='flex justify-center mt-5'>
-              <button className='bg-blue-500 text-white px-4 py-2 cursor-pointer rounded shadow-amber-200 hover:bg-blue-600'>Create Product</button>
+            <div className='flex justify-center pt-2'>
+              <button className='bg-blue-500 text-white px-4 py-2 cursor-pointer rounded shadow-amber-200 hover:bg-blue-600 w-full sm:w-auto'>Create Product</button>
             </div>  
 
 

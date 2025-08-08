@@ -25,12 +25,12 @@ function ConfirmationModal({ setshowModel, productId }) {
   }
 
   return (
-    <div className="absolute w-full h-screen bg-black/60 top-0 left-0 z-50 flex justify-center items-center">
-      <div className="max-w-2xl mx-auto bg-gray-900 border border-gray-500/25 p-4">
-        <h2>Confirm Product Deletion</h2>
+    <div className="fixed inset-0 z-50 flex justify-center items-center p-4 sm:p-6 bg-black/60 overflow-y-auto">
+      <div className="w-full max-w-md sm:max-w-2xl mx-auto bg-gray-900 border border-gray-500/25 p-4 rounded-lg shadow-xl">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">Confirm Product Deletion</h2>
 
-        <div className="flex gap-2">
-          <Button onClick={() => setshowModel(false)} variant="outline">
+        <div className="flex gap-2 justify-end">
+          <Button onClick={() => setshowModel(false)} variant="soft" color="gray">
             Cancel
           </Button>
             <Button

@@ -38,7 +38,7 @@ useEffect(()=> {
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
 
         <div className=''>
-          <h1 className='text-center text-2xl font-bold flex justify-center p-5 '> Current Products <Rocket size={18}/> </h1>
+          <h1 className='text-center text-xl sm:text-2xl font-bold flex items-center justify-center gap-2 p-4 sm:p-5'> Current Products <Rocket size={18}/> </h1>
         </div>
         {/* The Grid Container */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8'>

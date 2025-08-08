@@ -46,30 +46,28 @@ const ProductsCard = ({key, products, setshowModel, setProductId}) => {
     }
 
   return (
-    <div key={key} className='bg-gray-900 rounded-4xl shadow-lg'>
-        <div className='text-white'>
-            <img className='rounded-4xl'  src={products.image} alt="This is the alt" />
-            <div className='p-5'>
-                <h3 className='text-2xl'>{products.name} </h3>
+    <div key={key} className='bg-gray-900 rounded-xl shadow-lg overflow-hidden h-full'>
+        <div className='text-white flex flex-col h-full'>
+            <img className='w-full aspect-video object-cover'  src={products.image} alt={products.name || 'Product image'} />
+            <div className='p-4 sm:p-5 flex flex-col flex-1'>
+                <h3 className='text-lg sm:text-2xl font-semibold line-clamp-1'>{products.name} </h3>
                 <div className='flex gap-1.5 mt-2 items-center justify-between'>
                     <div>
-                        <p className='text-xl'>Price: {products.price}$</p>
+                        <p className='text-base sm:text-xl'>Price: {products.price}$</p>
                     </div>
-                    <div className='flex gap-2 text-xl '>
-                        {/* <PenBox className='p-1 bg-blue-400 text-black rounded '/> */}
+                    <div className='flex gap-2 text-lg sm:text-xl'>
                         <Dialog.Root>
               <Dialog.Trigger>
                 <PenBox
                   size={18}
-                  className="p-1 bg-blue-400 text-black rounded"
+                  className="p-1 bg-blue-400 text-black rounded cursor-pointer"
                 />
               </Dialog.Trigger>
 
-              <Dialog.Content maxWidth="400px">
+              <Dialog.Content maxWidth="480px" className="max-w-[90vw] sm:max-w-[480px]">
                 <Dialog.Title>Edit Product</Dialog.Title>
                 <Flex direction="column" gap="3">
                   <TextField.Root
-                    // defaultValue={products?.name}
                     placeholder="Update product name"
                     variant="soft"
                     type='text'
@@ -103,7 +101,7 @@ const ProductsCard = ({key, products, setshowModel, setProductId}) => {
                     size="1"
                     type="url"
                     variant="soft"
-                    value={updatedProduct.name}
+                    value={updatedProduct.image}
                     onChange={(e) => setUpdatedProduct ({...updatedProduct, image: e.target.value})}
                   />
 
@@ -120,8 +118,7 @@ const ProductsCard = ({key, products, setshowModel, setProductId}) => {
                 <Flex gap="3" mt="4" justify="end">
                   <Dialog.Close>
                     <Button variant="soft" color="gray">
-                      Cancel                        {/* <PenBox className='p-1 bg-blue-400 text-black rounded '/> */}
-
+                      Cancel
                     </Button>
                   </Dialog.Close>
                   <Dialog.Close asChild>
@@ -132,7 +129,7 @@ const ProductsCard = ({key, products, setshowModel, setProductId}) => {
                 </Flex>
               </Dialog.Content>
             </Dialog.Root>
-                        <Trash2Icon className='p-1 bg-red-400 text-black rounded ' onClick={()=> deleteProduct (products._id)}/>
+                        <Trash2Icon className='p-1 bg-red-400 text-black rounded cursor-pointer' onClick={()=> deleteProduct (products._id)}/>
                     </div>
                 </div>
             </div>

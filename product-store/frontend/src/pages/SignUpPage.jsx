@@ -48,14 +48,14 @@ function SignUpPage() {
   }
 
   return (
-    <div className="w-full h-screen items-center">
-      <div className="grid md:grid-cols-2">
+    <div className="w-full min-h-screen">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-6 grid md:grid-cols-2 gap-6">
         <div className="w-full flex flex-col items-center">
-          <MessagesSquareIcon />
-          <h2>Welcome</h2>
-          <p>Create a new account</p>
+          <MessagesSquareIcon className="size-6 sm:size-8" />
+          <h2 className="text-lg sm:text-xl font-semibold mt-2">Welcome</h2>
+          <p className="text-sm sm:text-base text-gray-400">Create a new account</p>
 
-          <form className="w-full relative p-8 space-y-4">
+          <form className="w-full relative p-4 sm:p-8 space-y-4 border rounded bg-white/5">
             <div className="relative flex w-full items-center">
               <User className="absolute insert-y-0 left-0 ml-1 size-5 opacity-30" />
               <label htmlFor="username" className="w-full">
@@ -63,7 +63,7 @@ function SignUpPage() {
                   type="text"
                   id="username"
                   placeholder="sahadev"
-                  className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  className="border rounded p-2 w-full border-gray-500/45 pl-7"
                   value={userData.username}
                   onChange={(e) => setUserData({ ...userData, username: e.target.value })}
                 />
@@ -77,7 +77,7 @@ function SignUpPage() {
                   type="email"
                   id="email"
                   placeholder="example@gmail.com"
-                  className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  className="border rounded p-2 w-full border-gray-500/45 pl-7"
                   value={userData.email}
                   onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                 />
@@ -91,7 +91,7 @@ function SignUpPage() {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="••••••••••"
-                  className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  className="border rounded p-2 w-full border-gray-500/45 pl-7"
                   value={userData.password}
                   onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                 />
@@ -116,7 +116,7 @@ function SignUpPage() {
                   type="url"
                   id="url"
                   placeholder="Enter your avatar url"
-                  className="border rounded p-1 w-full border-gray-500/45 pl-7"
+                  className="border rounded p-2 w-full border-gray-500/45 pl-7"
                   value={userData.avatarUrl}
                   onChange={(e) => setUserData({ ...userData, avatarUrl: e.target.value })}
                 />
@@ -130,14 +130,14 @@ function SignUpPage() {
               </button>
             </div>
           </form>
-          <div className="flex flex-wrap items-center space-x-2">
+          <div className="flex flex-wrap items-center space-x-2 mt-3">
             <p>Have an account?</p>
             <Link to="/signin" className="underline cursor-pointer">
             Sign In
             </Link>
            </div>
         </div>
-        <div className="w-full">
+        <div className="w-full hidden md:block">
           <AuthSkeleton title={"Welcome to HackChat"} text={"Join our community of hackers to learn how to build the next web"}/>
         </div>
       </div>
