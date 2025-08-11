@@ -17,6 +17,11 @@ function App() {
         {/* Define your routes here */}
         < Route path="/" element={<HomePage />} />
         < Route path="create-product" element={<CreatePage />} />
+        < Route path="profile" element={<ProfilePage />} />
+        <Toaster />
+        {/* Add more routes as needed */}
+        < Route path="*" element={<HomePage />} />
+        < Route path="login" element={<SignUpPage />} />
         < Route path="signup" element={<SignUpPage />} />
         
       </Routes>
