@@ -13,6 +13,14 @@ const ProfilePage = () => {
     <div>
       <form action="">
         <label htmlFor="">Name:</label>
+        <input type="text" placeholder='Enter your name' />
+        <br />
+        <label htmlFor="">Email:</label>
+        <input type="email" placeholder='Enter your email' />
+        <br />
+        <label htmlFor="">Password:</label>
+        <input type="password" placeholder='Enter your password' />
+
       </form>
     </div>
 
